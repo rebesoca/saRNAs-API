@@ -1,0 +1,11 @@
+# Large data files
+promoters/Hs_EPDnew.bed
+
+# R temp files
+*.Rhistory
+*.RData
+.Rproj.user/
+
+# Python
+__pycache__/
+*.pyc
