@@ -8,7 +8,7 @@ infoGenProm <- function(geneVector, upstream = 0){
   
   # Load EPD promoters data
   data_promo <- read.table(
-    file.path(dirname(rstudioapi::getActiveDocumentContext()$path),"Hs_EPDnew.bed"),
+    file.path(dirname(rstudioapi::getActiveDocumentContext()$path),"promoters/Hs_EPDnew.bed"),
     quote = "\"",
     comment.char = ""
   )
@@ -444,7 +444,7 @@ interpretAlignment <- function(candidates){
   }
   
   # Sort by DeltaG2
-  candidates <- candidates[order(-candidates$Global_score, candidates$DeltaG2_duplex), ]
+  candidates <- candidates[order(candidates$DeltaG2_duplex, -candidates$Global_score), ]
   rownames(candidates) <- NULL
   
   return(candidates)
@@ -484,6 +484,8 @@ filterCandidates <- function(candidates, max_deltaG1 = -1,
   message(paste("Final candidates:", nrow(f4), 
                 "(", round(nrow(f4)/n1*100, 1), "% of original)"))
   
+  # Sort by DeltaG2
+  f4 <- f4[order(f4$DeltaG2_duplex, -f4$Global_score), ]
   rownames(f4) <- NULL
   return(f4)
   
